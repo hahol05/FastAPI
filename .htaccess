@@ -1,0 +1,16 @@
+# Подключение с любого домена
+Header add Access-Control-Allow-Origin "*"
+
+# Запрет просмотра вложенных папок
+Options -Indexes
+
+# Привлекательный url
+<IfModule mod_rewrite.c> 
+RewriteEngine On 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule "^([^/]*)\.([^/]*)\.([^/]*)$" "index.php?_action=$1&_method=$2&_parametrs=$3" [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule "^([^/]*)\.([^/]*)$" "index.php?_action=$1&_method=$2" [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule "^([^/]*)$" "index.php?_action=$1" [L]
+</IfModule>
